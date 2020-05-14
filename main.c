@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * main - check the code for Holberton School students.
  *
@@ -12,7 +11,7 @@ int main(int argc, char* argv[])
 	char *line = NULL;
 	size_t len = 0, inter = 0;
 	ssize_t nread;
-
+	char *token;
 
 	if (argc != 2)
 	{
@@ -36,9 +35,50 @@ int main(int argc, char* argv[])
 		/*printf("L%i: usage: push integer\n", len);*/
 		nread++;
 
-		strtok(str, "\n\t");
-		exit("EXIT_FAILURE");
+		token = strtok(str, "\n\t");
+		
+
+
+		/* function_op(head, token, nread); */
 	}
 
 
 }
+
+
+/**
+ * get_op_func - selects the correct function to perform the operation
+ *
+ * @s: a pointer to sign string
+ * Return: the result of operation
+ */
+void function_op(stack_t *h_stack, char *operation, int nRead)
+{
+  int i;
+  instruction_t ops[] = {
+    {"push", push},
+    {"pall", pall},
+    /*{"*", op_mul},
+    {"/", op_div},
+    {"%", op_mod},*/
+    {NULL, NULL}
+  };
+
+
+  i = 0;
+  while (ops[i].opcode)
+    {
+      
+      if (strcmp(*(ops[i]).op, operation) == 0)
+	return (ops[i].f(h_stack, nRead));
+
+      i++;
+
+    }
+
+  dprintf(2, "L<%d>: usage: push integer", nRead);
+
+
+  exit(EXIT_FAILURE);
+}
+

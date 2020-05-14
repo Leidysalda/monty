@@ -1,15 +1,13 @@
 #ifndef MONTY_H
 #define MONTY_H
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <stdin.h>
-#include <stdout.h>
-#include <stdrr.h>
-#include <sfcntl.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "monty.h"
+#include <fcntl.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -34,8 +32,6 @@ size_t print(const stack_t *h);
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
- * Description: opcode and its function
- * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct instruction_s
 {
@@ -56,7 +52,7 @@ typedef struct function_s
 	FILE* demo;
 	char *opcode;
         int *value;
-} fuction_t;
+} function_t;
 
 function_t monty_line;
 
