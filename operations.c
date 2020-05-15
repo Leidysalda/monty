@@ -16,6 +16,8 @@ void push(stack_t **stack, unsigned int line_number)
 	(void) line_number;
 
 	new_node = node_end(stack, atoi(monty_line.value));
+
+
 	if (new_node == NULL)
 	{
 		dprintf(2, "Error: malloc failed");

@@ -37,8 +37,22 @@ int main(int argc, char *argv[])
 
 		token = strtok(line, "\n\t ");
 
+		if (!token)
+		{
+			dprintf(2, "L%d: usage: push integer\n", count_line);
+			exit(EXIT_FAILURE);
+		}
+
 		monty_line.value = strtok(NULL, "\n\t ");
 
+		printf("%s\n", monty_line.value);
+
+
+		if (monty_line.value == NULL)
+		{
+			dprintf(2, "L%d: usage: push integer\n", count_line);
+			exit(EXIT_FAILURE);
+		}
 		function_op(&head, token, count_line);
 	}
 	free_list(&head);
@@ -76,7 +90,7 @@ void function_op(stack_t **h_stack, char *operation, int nRead)
 		i++;
 	}
 
-	dprintf(2, "L<%d>: usage: push integer\n", nRead);
+	dprintf(2, "L%d: usage: push integer\n", nRead);
 
 
 	exit(EXIT_FAILURE);
