@@ -49,13 +49,14 @@ typedef struct instruction_s
  */
 typedef struct function_s
 {
-	FILE* demo;
+	FILE *demo;
 	char *opcode;
         char *value;
 } function_t;
 
 function_t monty_line;
 
+stack_t *node_end(stack_t **stack, int n);
 void free_list(stack_t **head);
 void function_op(stack_t **h_stack, char *operation, int nRead);
 void push(stack_t **stack, unsigned int line_number);
