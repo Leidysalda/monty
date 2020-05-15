@@ -7,9 +7,11 @@
 int main(int argc, char* argv[])
 {
 	stack_t *head;
-	FILE* demo;
+	FILE* demo = NULL;
 	char *line = NULL;
-	size_t len = 0, inter = 0;
+	size_t len = 0;
+	int count_line = 0;
+	char *number = 0;
 	ssize_t nread;
 	char *token;
 
@@ -20,7 +22,7 @@ int main(int argc, char* argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	demo = fopen(argv[1], O_RDONLY);
+	demo = fopen(argv[1], "r");
 
 	if (demo == NULL)
 	{
@@ -28,39 +30,37 @@ int main(int argc, char* argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	monty_line.demo = demo;
-
-	while ((nread = getline(&line, &len, demo)) != -1);
+	while ((nread = getline(&line, &len, demo)) != -1)
 	{
-		/*printf("L%i: usage: push integer\n", len);*/
-		nread++;
+		count_line++;
 
-		token = strtok(str, "\n\t");
-		
+		token = strtok(line, "\n\t");
 
+		number = strtok(NULL, "\n\t ");
+		printf("%s", number);
 
-		/* function_op(head, token, nread); */
+		function_op(&head, token, count_line);
 	}
+	free(line);
 
-
+	return (EXIT_SUCCESS);
 }
-
 
 /**
  * get_op_func - selects the correct function to perform the operation
  *
- * @s: a pointer to sign string
+ * @h_stack: head a pointer to sign string
+ * @operation: operation
+ * @nRead: number
+ *
  * Return: the result of operation
  */
-void function_op(stack_t *h_stack, char *operation, int nRead)
+void function_op(stack_t **h_stack, char *operation, int nRead)
 {
   int i;
   instruction_t ops[] = {
     {"push", push},
     {"pall", pall},
-    /*{"*", op_mul},
-    {"/", op_div},
-    {"%", op_mod},*/
     {NULL, NULL}
   };
 
@@ -68,12 +68,12 @@ void function_op(stack_t *h_stack, char *operation, int nRead)
   i = 0;
   while (ops[i].opcode)
     {
-      
-      if (strcmp(*(ops[i]).op, operation) == 0)
-	return (ops[i].f(h_stack, nRead));
-
-      i++;
-
+	    if (strcmp(ops[i].opcode, operation) == 0)
+	    {
+		    ops[i].f(h_stack, nRead);
+		    return;
+	    }
+	    i++;
     }
 
   dprintf(2, "L<%d>: usage: push integer", nRead);
@@ -82,3 +82,30 @@ void function_op(stack_t *h_stack, char *operation, int nRead)
   exit(EXIT_FAILURE);
 }
 
+/**
+ * push - function push
+ *
+ * @stack: head a pointer to sign string
+ * @number: number
+ *
+ * Return: the result of operation
+ */
+void push(stack_t **stack, unsigned int line_number)
+{
+	(void) stack;
+	(void) line_number;
+}
+
+/**
+ * pall - function pall
+ *
+ * @stack: head a pointer to sign string
+ * @number: number
+ *
+ * Return: the result of operation
+ */
+void pall(stack_t **stack, unsigned int line_number)
+{
+	(void) stack;
+	(void) line_number;
+}

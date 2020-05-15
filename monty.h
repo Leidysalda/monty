@@ -54,6 +54,8 @@ typedef struct function_s
         int *value;
 } function_t;
 
-function_t monty_line;
+void function_op(stack_t **stack, char *operation, int nRead);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 
 #endif
