@@ -51,10 +51,13 @@ typedef struct function_s
 {
 	FILE* demo;
 	char *opcode;
-        int *value;
+        char *value;
 } function_t;
 
-void function_op(stack_t **stack, char *operation, int nRead);
+function_t monty_line;
+
+void free_list(stack_t **head);
+void function_op(stack_t **h_stack, char *operation, int nRead);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 
