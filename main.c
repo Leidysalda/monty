@@ -3,13 +3,14 @@
 #include <stdlib.h>
 /**
  * main - check the code for Holberton School students.
- *
+ * @argc: argumentos
+ * @argv: Count arguments
  * Return: Always EXIT_SUCCESS.
  */
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	stack_t *head = NULL;
-	FILE* demo = NULL;
+	FILE *demo = NULL;
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t nread = 0;
@@ -18,7 +19,6 @@ int main(int argc, char* argv[])
 
 	if (argc != 2)
 	{
-
 		dprintf(2, "USAGE: monty file");
 		exit(EXIT_FAILURE);
 	}
@@ -41,7 +41,6 @@ int main(int argc, char* argv[])
 
 		function_op(&head, token, count_line);
 	}
-
 	free_list(&head);
 
 	return (EXIT_SUCCESS);
@@ -58,29 +57,29 @@ int main(int argc, char* argv[])
  */
 void function_op(stack_t **h_stack, char *operation, int nRead)
 {
-  int i;
-  instruction_t ops[] = {
-    {"push", push},
-    {"pall", pall},
-    {NULL, NULL}
-  };
+	int i;
+	instruction_t ops[] = {
+		{"push", push},
+		{"pall", pall},
+		{NULL, NULL}
+	};
 
 
-  i = 0;
-  while (ops[i].opcode)
-    {
-	    if (strcmp(ops[i].opcode, operation) == 0)
-	    {
-		    ops[i].f(h_stack, nRead);
-		    return;
-	    }
-	    i++;
-    }
+	i = 0;
+	while (ops[i].opcode)
+	{
+		if (strcmp(ops[i].opcode, operation) == 0)
+		{
+			ops[i].f(h_stack, nRead);
+			return;
+		}
+		i++;
+	}
 
-  dprintf(2, "L<%d>: usage: push integer\n", nRead);
+	dprintf(2, "L<%d>: usage: push integer\n", nRead);
 
 
-  exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
 
@@ -123,12 +122,12 @@ stack_t *node_end(stack_t **stack, int n)
 
 	if (stack == NULL)
 	{
-		return(NULL);
+		return (NULL);
 	}
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
-		return(NULL);
+		return (NULL);
 
 	new_node->n = n;
 	new_node->next = *stack;
@@ -147,7 +146,7 @@ stack_t *node_end(stack_t **stack, int n)
  * push - function push
  *
  * @stack: head a pointer to sign string
- * @number: number
+ * @line_number: line number
  *
  * Return: the result of operation
  */
@@ -179,7 +178,7 @@ void pall(stack_t **stack, unsigned int line_number)
 	(void) line_number;
 
 	tmp = *stack;
-	while(tmp != NULL)
+	while (tmp != NULL)
 	{
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
